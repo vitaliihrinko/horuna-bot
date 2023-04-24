@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  telegram-bot:
+    container_name: telegram-bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - TELEGRAM_TOKEN=6172133477:AAHbySYc2ealCwulrSjNXfHcN6kvsRjXzvE
+      - DB_URL=sqlite:/Users/vitaliihrinko/pythonProject/bot.db
+    volumes:
+      - ./bot.db:/Users/vitaliihrinko/pythonProject/bot.db
+    depends_on:
+      - db
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: <db_user>
+      POSTGRES_PASSWORD: <db_password>
+      POSTGRES_DB: <db_name>
